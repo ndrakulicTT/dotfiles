@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=-1
+HISTFILESIZE=-1
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -143,6 +143,9 @@ alias hless='history | less'
 alias gs='git status'
 alias gw='git switch'
 alias gb='git branch'
+alias gl='git log'
+alias glo='git log --oneline'
+alias glog='git log --oneline --graph'
 
 
 # List all git extra files (that could be removed)
@@ -155,11 +158,15 @@ alias g-which-branch='git branch -a --contains'
 export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
 
 if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
-  __git_complete gs git_status
-  __git_complete gw git_switch
-  __git_complete gb git_branch
+    . ~/.git-completion.bash
+    __git_complete gs git_status
+    __git_complete gw git_switch
+    __git_complete gb git_branch
+    __git_complete gl git_log
+    __git_complete glo git_log
+    __git_complete glog git_log
 fi
+
 
 # Install direnv
 eval "$(direnv hook bash)"
@@ -170,3 +177,5 @@ eval "$(direnv hook bash)"
 # export TTFORGE_VENV_DIR=/proj_sw/user_dev/ndrakulic/ttforge-toolchain/venv
 
 export PATH="/home/ndrakulic/.cargo/bin:$PATH"
+
+export CCACHE_DIR=/localdev/ndrakulic/ccache
