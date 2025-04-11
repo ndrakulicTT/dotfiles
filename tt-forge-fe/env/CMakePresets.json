@@ -1,0 +1,24 @@
+{
+    "version": 4,
+    "configurePresets": [
+      {
+        "name": "conf-env",
+        "displayName": "Configure TTFORGE env",
+        "generator": "Ninja",
+        "cacheVariables": {
+          "TTFORGE_SKIP_BUILD_TTMLIR_ENV": "ON"
+        },
+        "hidden": false,
+        "cmakeExecutable": "sea_cmake",
+        "binaryDir": "${sourceDir}/build"
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "build",
+        "displayName": "Build TTFORGE env",
+        "configurePreset": "conf-env"
+      }
+    ]
+  }
+  
