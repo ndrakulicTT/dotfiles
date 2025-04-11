@@ -167,6 +167,23 @@ if [ -f ~/.git-completion.bash ]; then
     __git_complete glog git_log
 fi
 
+sea() {
+  local dir
+  dir=$(pwd)
+
+  if [[ "$dir" == $(realpath "$PROJECTS_ROOT/tt-metal")* ]]; then
+    source python_env/bin/activate
+  elif [[ "$dir" == $(realpath "$PROJECTS_ROOT/tt-mlir")* ]]; then
+    source env/activate
+  elif [[ "$dir" == $(realpath "$PROJECTS_ROOT/tt-xla")* ]]; then
+    source venv/activate
+  elif [[ "$dir" == $(realpath "$PROJECTS_ROOT/tt-forge-fe")** ]]; then
+    source env/activate
+  else
+    echo "Unknown project for sea"
+    return 1
+  fi
+}
 
 # Install direnv
 eval "$(direnv hook bash)"
@@ -179,3 +196,4 @@ eval "$(direnv hook bash)"
 export PATH="/home/ndrakulic/.cargo/bin:$PATH"
 
 export CCACHE_DIR=/localdev/ndrakulic/ccache
+export PROJECTS_ROOT=/localdev/ndrakulic
